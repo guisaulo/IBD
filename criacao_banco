@@ -1,0 +1,17 @@
+CREATE TABLE EMPREENDIMENTO (empreendimento_id INT NOT NULL, tipo_empreendimento_id INT NOT NULL, localizacao_id INT NOT NULL, e_nome VARCHAR(255) NOT NULL, datainicio DATE, datafim DATE, investimento_total INT, PRIMARY KEY (empreendimento_id));
+CREATE TABLE TIPO_EMPREENDIMENTO (tipo_empreendimento_id INT NOT NULL, te_nome VARCHAR(255) NOT NULL, subeixo VARCHAR(255), PRIMARY KEY (tipo_empreendimento_id));
+CREATE TABLE LOCALIZACAO (localizacao_id INT NOT NULL, nome_do_municipio VARCHAR(255) NOT NULL, coordenada_id INT NOT NULL, PRIMARY KEY(localizacao_id));
+
+CREATE TABLE TIPO_EMPREENDIMENTO_LOCALIZACAO (tel_tipo_id INT NOT NULL, tel_localizacao_id INT NOT NULL, FOREIGN KEY (tel_tipo_id) REFERENCES TIPO_EMPREENDIMENTO (tipo_empreendimento_id), FOREIGN KEY (tel_localizacao_id) REFERENCES LOCALIZACAO (localizacao_id));
+
+FOREIGN KEY (ore_orgao_responsavel_id REFERENCES ORGAO_RESPONSAVEL (orgao_responsavel_id), FOREIGN KEY (ore_empreendimento_id) REFERENCES EMPREENDIMENTO (empreendimento_id)));
+
+LOAD DATA LOCAL INFILE '/home/guisaulo/tipo_empreendimento.csv' INTO TABLE TIPO_EMPREENDIMENTO FIELDS TERMINATED BY ';' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' (tipo_empreendimento_id, te_nome, subeixo);
+
+CREATE TABLE COORDENADA (coordenada_id INT NOT NULL, latitude VARCHAR(255), longitude VARCHAR(255), PRIMARY KEY (coordenada_id));
+
+
+CREATE TABLE EMPREENDIMENTO (empreendimento_id INT NOT NULL, e_tipo_empreendimento_id INT NOT NULL, e_localizacao_id INT NOT NULL, e_nome VARCHAR(255) NOT NULL, datainicio DATE, datafim DATE, investimento_total INT, PRIMARY KEY (empreendimento_id), FOREIGN KEY (e_tipo_empreendimento_id) REFERENCES TIPO_EMPREENDIMENTO (tipo_empreendimento_id), FOREIGN KEY (e_localizacao_id) REFERENCES LOCALIZACAO (localizacao_id));
+
+mysql> CREATE TABLE EMPREENDIMENTO (empreendimento_id INT NOT NULL, e_tipo_empreendimento_id INT NOT NULL, e_localizacao_id INT NOT NULL, e_nome VARCHAR(255) NOT NULL, dataciclo DATE, investimento_total INT, PRIMARY KEY (empreendimento_id), FOREIGN KEY (e_tipo_empreendimento_id) REFERENCES TIPO_EMPREENDIMENTO (tipo_empreendimento_id), FOREIGN KEY (e_localizacao_id) REFERENCES LOCALIZACAO (localizacao_id));
+
